@@ -27,6 +27,32 @@ class ApiV1MemberControllerTest {
     private lateinit var memberFacade: MemberFacade
 
     @Test
+    fun `프로필 이미지 리다이렉트 요청이 성공하면 Location 헤더와 함께 302를 반환한다`() {
+        val member = memberFacade.findByUsername("user1")!!
+
+        mvc.get("/member/api/v1/members/${member.id}/redirectToProfileImg")
+            .andExpect {
+                status { isFound() }
+                match(handler().handlerType(ApiV1MemberController::class.java))
+                match(handler().methodName("redirectToProfileImg"))
+                header { exists(HttpHeaders.LOCATION) }
+                header { string(HttpHeaders.LOCATION, member.profileImgUrlOrDefault) }
+            }
+    }
+
+    @Test
+    fun `프로필 이미지 리다이렉트 요청에서 없는 회원 id 를 보내면 404를 반환한다`() {
+        mvc.get("/member/api/v1/members/999999/redirectToProfileImg")
+            .andExpect {
+                status { isNotFound() }
+                match(handler().handlerType(ApiV1MemberController::class.java))
+                match(handler().methodName("redirectToProfileImg"))
+                jsonPath("$.resultCode") { value("404-1") }
+                jsonPath("$.msg") { value("해당 데이터가 존재하지 않습니다.") }
+            }
+    }
+
+    @Test
     fun `랜덤 보안 팁 조회는 보안 안내 문구를 반환한다`() {
         mvc.get("/member/api/v1/members/randomSecureTip")
             .andExpect {

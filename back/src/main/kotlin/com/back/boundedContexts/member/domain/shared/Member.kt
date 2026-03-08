@@ -47,6 +47,9 @@ class Member(
     @field:Column(unique = true, nullable = false)
     var apiKey: String,
 ) : BaseTime(id) {
+    val profileImgUrlOrDefault: String
+        get() = "https://placehold.co/600x600?text=U_U"
+
     fun modifyApiKey(apiKey: String) {
         this.apiKey = apiKey
     }
