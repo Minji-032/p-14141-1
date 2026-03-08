@@ -1,6 +1,7 @@
 package com.back.boundedContexts.member.`in`.shared
 
 import com.back.boundedContexts.member.app.MemberFacade
+import com.back.boundedContexts.member.app.shared.AuthTokenService
 import jakarta.servlet.http.Cookie
 import org.assertj.core.api.Assertions.assertThat
 import org.hamcrest.Matchers.startsWith
@@ -28,6 +29,9 @@ class ApiV1AuthControllerTest {
 
     @Autowired
     private lateinit var memberFacade: MemberFacade
+
+    @Autowired
+    private lateinit var authTokenService: AuthTokenService
 
     @Test
     fun `로그인 요청이 성공하면 회원 정보와 토큰 그리고 쿠키를 반환한다`() {
@@ -218,5 +222,32 @@ class ApiV1AuthControllerTest {
         assertThat(accessTokenCookie.isHttpOnly).isTrue
         assertThat(result.response.getHeader(HttpHeaders.AUTHORIZATION))
             .isEqualTo(accessTokenCookie.value)
+    }
+
+    @Test
+    fun `내 정보 조회에서 Authorization 헤더의 apiKey 와 accessToken 이 모두 유효하면 회원 정보를 반환하고 accessToken 을 재발급하지 않는다`() {
+        val member = memberFacade.findByUsername("user1")!!
+        val accessToken = authTokenService.genAccessToken(member)
+
+        val resultActions = mvc.get("/member/api/v1/auth/me") {
+            header(HttpHeaders.AUTHORIZATION, "Bearer ${member.apiKey} $accessToken")
+        }.andExpect {
+            status { isOk() }
+            match(handler().handlerType(ApiV1AuthController::class.java))
+            match(handler().methodName("me"))
+            jsonPath("$.id") { value(member.id) }
+            jsonPath("$.createdAt") { value(startsWith(member.createdAt.toString().take(20))) }
+            jsonPath("$.modifiedAt") { value(startsWith(member.modifiedAt.toString().take(20))) }
+            jsonPath("$.isAdmin") { value(member.isAdmin) }
+            jsonPath("$.username") { value(member.username) }
+            jsonPath("$.name") { value(member.name) }
+            jsonPath("$.nickname") { value(member.nickname) }
+            jsonPath("$.profileImageUrl") { value(member.redirectToProfileImgUrlOrDefault) }
+        }
+
+        val result = resultActions.andReturn()
+
+        assertThat(result.response.getCookie("accessToken")).isNull()
+        assertThat(result.response.getHeader(HttpHeaders.AUTHORIZATION)).isNull()
     }
 }
