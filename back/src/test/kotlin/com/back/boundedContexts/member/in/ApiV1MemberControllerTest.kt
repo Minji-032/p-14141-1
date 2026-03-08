@@ -92,6 +92,7 @@ class ApiV1MemberControllerTest {
             jsonPath("$.data.createdAt") { value(startsWith(member.createdAt.toString().take(20))) }
             jsonPath("$.data.modifiedAt") { value(startsWith(member.modifiedAt.toString().take(20))) }
             jsonPath("$.data.name") { value(member.nickname) }
+            jsonPath("$.data.profileImageUrl") { value(member.profileImgUrlOrDefault) }
         }
     }
 

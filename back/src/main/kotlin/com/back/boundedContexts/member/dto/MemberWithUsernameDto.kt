@@ -9,6 +9,7 @@ data class MemberWithUsernameDto(
     val modifiedAt: Instant,
     val username: String,
     val nickname: String,
+    val profileImageUrl: String,
 ) {
     constructor(member: Member) : this(
         id = member.id,
@@ -16,5 +17,6 @@ data class MemberWithUsernameDto(
         modifiedAt = member.modifiedAt,
         username = member.username,
         nickname = member.nickname,
+        profileImageUrl = member.profileImgUrlOrDefault,
     )
 }
