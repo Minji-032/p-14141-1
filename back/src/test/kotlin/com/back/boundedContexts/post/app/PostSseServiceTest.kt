@@ -1,12 +1,11 @@
 package com.back.boundedContexts.post.app
 
+import com.back.IntegrationTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.server.LocalServerPort
-import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
 import java.net.URI
 import java.net.http.HttpClient
@@ -15,10 +14,9 @@ import java.net.http.HttpResponse
 import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.TimeUnit
 
-@Disabled("임시 스킵")
-@ActiveProfiles("test")
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class PostSseServiceTest {
+@Transactional
+@Disabled
+class PostSseServiceTest : IntegrationTest() {
 
     @LocalServerPort
     private var port: Int = 0
