@@ -1,4 +1,4 @@
-name: p14141_dev
+name: p_14141_1_dev
 services:
   redis_1:
     image: redis:latest
