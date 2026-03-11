@@ -20,7 +20,8 @@ concurrency:
 on:
   push:
     paths:
-      - ".github/workflows/**"
+      - ".github/workflows/*.yml"
+      - ".github/workflows/*.yaml"
       - "back/.env"
       - "back/src/**"
       - "back/build.gradle.kts"
