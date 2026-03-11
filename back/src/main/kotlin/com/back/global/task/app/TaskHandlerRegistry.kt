@@ -19,8 +19,8 @@ class TaskHandlerRegistry {
     internal fun register(type: String, entry: TaskHandlerEntry) {
         check(!byType.containsKey(type)) {
             "Duplicate @TaskHandler for type '$type': " +
-                "already registered by ${byType[type]!!.handlerMethod.method.declaringClass.simpleName}, " +
-                "duplicate found in ${entry.handlerMethod.bean::class.java.simpleName}"
+                    "already registered by ${byType[type]!!.handlerMethod.method.declaringClass.simpleName}, " +
+                    "duplicate found in ${entry.handlerMethod.bean::class.java.simpleName}"
         }
         byType[type] = entry
         typeByClass[entry.payloadClass] = type

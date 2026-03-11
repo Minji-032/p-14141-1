@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service
 class MemberApiClient(
     private val internalRestClient: InternalRestClient
 ) {
-    private val authHeaders get() = mapOf(
-        HttpHeaders.AUTHORIZATION to "Bearer ${AppFacade.systemMemberApiKey}"
-    )
+    private val authHeaders
+        get() = mapOf(
+            HttpHeaders.AUTHORIZATION to "Bearer ${AppFacade.systemMemberApiKey}"
+        )
 
     val randomSecureTip: String
         get() {

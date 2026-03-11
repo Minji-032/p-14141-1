@@ -1,25 +1,17 @@
 package com.back.boundedContexts.member.`in`
 
+import com.back.IntegrationMockMvcTest
 import com.back.boundedContexts.member.app.MemberFacade
-import com.back.IntegrationTest
 import com.back.standard.dto.member.type1.MemberSearchSortType1
 import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc
 import org.springframework.security.test.context.support.WithUserDetails
-import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.handler
-import org.springframework.transaction.annotation.Transactional
 
-@AutoConfigureMockMvc
-@Transactional
-class ApiV1AdmMemberControllerTest : IntegrationTest() {
-    @Autowired
-    private lateinit var mvc: MockMvc
-
+class ApiV1AdmMemberControllerTest : IntegrationMockMvcTest() {
     @Autowired
     private lateinit var memberFacade: MemberFacade
 

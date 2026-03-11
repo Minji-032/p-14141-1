@@ -10,7 +10,11 @@ import org.hibernate.annotations.DynamicUpdate
 @DynamicUpdate
 class MemberActionLog(
     @field:Id
-    @field:SequenceGenerator(name = "member_action_log_seq_gen", sequenceName = "member_action_log_seq", allocationSize = 50)
+    @field:SequenceGenerator(
+        name = "member_action_log_seq_gen",
+        sequenceName = "member_action_log_seq",
+        allocationSize = 50
+    )
     @field:GeneratedValue(strategy = SEQUENCE, generator = "member_action_log_seq_gen")
     override val id: Int = 0,
 

@@ -1,8 +1,8 @@
 package com.back.boundedContexts.post.`in`
 
+import com.back.IntegrationMockMvcTest
 import com.back.boundedContexts.member.app.shared.ActorFacade
 import com.back.boundedContexts.post.app.PostFacade
-import com.back.IntegrationTest
 import com.back.boundedContexts.post.domain.Post
 import com.back.boundedContexts.post.domain.PostComment
 import com.back.standard.extensions.getOrThrow
@@ -10,19 +10,15 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc
 import org.springframework.http.MediaType
 import org.springframework.security.test.context.support.WithUserDetails
-import org.springframework.test.web.servlet.*
+import org.springframework.test.web.servlet.delete
+import org.springframework.test.web.servlet.get
+import org.springframework.test.web.servlet.post
+import org.springframework.test.web.servlet.put
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.handler
-import org.springframework.transaction.annotation.Transactional
 
-@AutoConfigureMockMvc
-@Transactional
-class ApiV1PostCommentControllerTest : IntegrationTest() {
-    @Autowired
-    private lateinit var mvc: MockMvc
-
+class ApiV1PostCommentControllerTest : IntegrationMockMvcTest() {
     @Autowired
     private lateinit var postFacade: PostFacade
 

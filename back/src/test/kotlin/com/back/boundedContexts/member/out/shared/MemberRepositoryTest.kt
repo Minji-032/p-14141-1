@@ -1,8 +1,8 @@
 package com.back.boundedContexts.member.out.shared
 
+import com.back.IntegrationTest
 import com.back.boundedContexts.member.app.MemberFacade
 import com.back.boundedContexts.member.domain.shared.Member
-import com.back.IntegrationTest
 import com.back.standard.dto.member.type1.MemberSearchSortType1
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Nested
@@ -10,9 +10,7 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
-import org.springframework.transaction.annotation.Transactional
 
-@Transactional
 class MemberRepositoryTest : IntegrationTest() {
 
     @Autowired

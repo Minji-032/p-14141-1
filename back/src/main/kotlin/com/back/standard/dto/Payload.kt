@@ -1,6 +1,6 @@
 package com.back.standard.dto
 
-import java.util.UUID
+import java.util.*
 
 interface Payload {
     val uid: UUID

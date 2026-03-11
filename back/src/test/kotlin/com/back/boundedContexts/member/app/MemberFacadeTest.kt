@@ -1,13 +1,11 @@
 package com.back.boundedContexts.member.app
 
-import com.back.boundedContexts.member.out.shared.MemberAttrRepository
 import com.back.IntegrationTest
+import com.back.boundedContexts.member.out.shared.MemberAttrRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.transaction.annotation.Transactional
 
-@Transactional
 class MemberFacadeTest : IntegrationTest() {
     @Autowired
     private lateinit var memberFacade: MemberFacade
@@ -18,7 +16,7 @@ class MemberFacadeTest : IntegrationTest() {
     @Test
     fun `회원 생성에서 profileImgUrl 을 함께 넘기면 기본 이미지 대신 저장된 이미지가 사용된다`() {
         val member = memberFacade.join(
-"profile-user",
+            "profile-user",
             "1234",
             "프로필유저",
             "https://example.com/profile-user.png",

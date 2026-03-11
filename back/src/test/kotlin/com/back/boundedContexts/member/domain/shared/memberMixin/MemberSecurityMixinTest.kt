@@ -1,13 +1,11 @@
 package com.back.boundedContexts.member.domain.shared.memberMixin
 
-import com.back.boundedContexts.member.app.MemberFacade
 import com.back.IntegrationTest
+import com.back.boundedContexts.member.app.MemberFacade
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.transaction.annotation.Transactional
 
-@Transactional
 class MemberSecurityMixinTest : IntegrationTest() {
     @Autowired
     private lateinit var memberFacade: MemberFacade

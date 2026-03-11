@@ -1,16 +1,14 @@
 package com.back.boundedContexts.member.app.shared
 
+import com.back.IntegrationTest
 import com.back.boundedContexts.member.domain.shared.MemberProxy
 import com.back.boundedContexts.member.dto.shared.AccessTokenPayload
 import com.back.global.security.domain.SecurityUser
-import com.back.IntegrationTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.authority.SimpleGrantedAuthority
-import org.springframework.transaction.annotation.Transactional
 
-@Transactional
 class ActorFacadeTest : IntegrationTest() {
     @Autowired
     private lateinit var actorFacade: ActorFacade

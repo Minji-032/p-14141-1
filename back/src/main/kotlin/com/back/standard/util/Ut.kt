@@ -173,7 +173,12 @@ object Ut {
             return metadata
         }
 
-        fun makeThumbnail(srcFilePath: String, destFilePath: String, maxWidth: Int, maxHeight: Int = maxWidth): Boolean {
+        fun makeThumbnail(
+            srcFilePath: String,
+            destFilePath: String,
+            maxWidth: Int,
+            maxHeight: Int = maxWidth
+        ): Boolean {
             return try {
                 val originalImage = ImageIO.read(File(srcFilePath)) ?: return false
                 val originalWidth = originalImage.width

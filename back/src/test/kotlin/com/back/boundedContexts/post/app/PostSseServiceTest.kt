@@ -2,11 +2,9 @@ package com.back.boundedContexts.post.app
 
 import com.back.IntegrationTest
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.web.server.LocalServerPort
-import org.springframework.transaction.annotation.Transactional
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
@@ -14,8 +12,7 @@ import java.net.http.HttpResponse
 import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.TimeUnit
 
-@Transactional
-@Disabled
+// @Disabled
 class PostSseServiceTest : IntegrationTest() {
 
     @LocalServerPort
@@ -58,7 +55,6 @@ class PostSseServiceTest : IntegrationTest() {
     }
 
     @Test
-    @Transactional
     fun `notifyNewPost 를 호출하면 posts-new 채널을 구독 중인 클라이언트가 데이터를 수신한다`() {
         val post = postFacade.findById(1)!!
         val received = subscribeSse("posts-new")
